@@ -7,3 +7,4 @@
 * better quit mechanism
 * autoloading
 * completion for topics command
+* Add markdown header for new files
