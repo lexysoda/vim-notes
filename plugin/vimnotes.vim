@@ -23,3 +23,12 @@ endfunction
 
 command! NotesOpenDiary call s:NotesOpenDiary()
 command! -nargs=1 NotesOpenTopic call s:NotesOpenTopic(<q-args>)
+
+if !exists("g:loaded_fzf_vim")
+  finish
+endif
+
+command! -bang -nargs=* NotesFZF
+  \ call fzf#vim#ag(<q-args>,
+  \                 fzf#vim#with_preview({"dir": g:vimnotes_dir}, "right:50%"),
+  \                 <bang>0)
