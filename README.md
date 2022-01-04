@@ -1,5 +1,9 @@
 # vim-notes
 
+## todo
+
+* open fzf result in split
+
 ## ideas
 
 * set [loaded flag](https://vimhelp.org/usr_41.txt.html#use%2dcpo%2dsave)
