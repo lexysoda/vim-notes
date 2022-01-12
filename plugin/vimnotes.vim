@@ -1,3 +1,8 @@
+if exists("g:loaded_vimnotes")
+  finish
+endif
+g:loaded_vimnotes = 1
+
 if !exists("g:vimnotes_extension")
   let g:vimnotes_extension = ".md"
 endif
