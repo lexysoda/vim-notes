@@ -1,6 +1,9 @@
 # vim-notes
 ## todo
-* open fzf result in split
+* open fzf result in split - use sink
+* dont close on write
+* create commit on write (maybe even push)
+* maybe pull on autoload?
 
 ## ideas
 * docs
