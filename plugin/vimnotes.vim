@@ -21,11 +21,39 @@ let s:topic_dir = g:vimnotes_dir . "/topics"
 function! s:NotesOpenDiary()
   let l:file = s:diary_dir . "/" . strftime(g:vimnotes_timeformat) . g:vimnotes_extension
   execute "vsp " . l:file
+  call s:SetBufferDiary()
 endfunction
 
 function! s:NotesOpenTopic(topic)
   let l:file = s:topic_dir . "/" . a:topic . g:vimnotes_extension
   execute "vsp " . l:file
+endfunction
+
+function! s:SwitchDiaryIndex(rel)
+  let l:dates = s:DiaryFiles()
+  let l:cur = l:dates->index(expand('%:t:r'))
+  let l:selection = l:dates->get(l:cur + a:rel)
+  if l:selection == 0
+    return
+  endif
+  execute "e " . s:diary_dir . "/" . l:selection . g:vimnotes_extension
+  call s:SetBufferDiary()
+endfunction
+
+function! s:DiaryFiles()
+  let l:dates = globpath(s:diary_dir, '*', 0, 1)->map({_, val -> fnamemodify(val, ':t:r')})
+  let l:dates = l:dates + [strftime(g:vimnotes_timeformat)]
+  eval l:dates->sort({d1, d2 -> g:ToEpoch(d1) > g:ToEpoch(d2)})
+  return l:dates->uniq()
+endfunction
+
+function! s:ToEpoch(d)
+  return systemlist('date -d ' . shellescape(a:d) . ' +"%s"')[0]
+endfunction
+
+function! s:SetBufferDiary()
+  nnoremap <buffer> <C-o> :call <SID>SwitchDiaryIndex(-1)<CR>
+  nnoremap <buffer> <C-i> :call <SID>SwitchDiaryIndex(1)<CR>
 endfunction
 
 command! NotesOpenDiary call s:NotesOpenDiary()
