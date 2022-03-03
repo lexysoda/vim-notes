@@ -17,13 +17,11 @@ let s:topic_dir = g:vimnotes_dir . "/topics"
 function! s:NotesOpenDiary()
   let l:file = s:diary_dir . "/" . strftime("%F") . g:vimnotes_extension
   execute "vsp " . l:file
-  autocmd BufWritePost <buffer> bdelete
 endfunction
 
 function! s:NotesOpenTopic(topic)
   let l:file = s:topic_dir . "/" . a:topic . g:vimnotes_extension
   execute "vsp " . l:file
-  autocmd BufWritePost <buffer> bdelete
 endfunction
 
 command! NotesOpenDiary call s:NotesOpenDiary()
