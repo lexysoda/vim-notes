@@ -43,7 +43,7 @@ endfunction
 function! s:DiaryFiles()
   let l:dates = globpath(s:diary_dir, '*', 0, 1)->map({_, val -> fnamemodify(val, ':t:r')})
   let l:dates = l:dates + [strftime(g:vimnotes_timeformat)]
-  eval l:dates->sort({d1, d2 -> g:ToEpoch(d1) > g:ToEpoch(d2)})
+  eval l:dates->sort({d1, d2 -> s:ToEpoch(d1) > s:ToEpoch(d2)})
   return l:dates->uniq()
 endfunction
 
