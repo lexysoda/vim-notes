@@ -11,11 +11,15 @@ if !exists("g:vimnotes_dir")
   let g:vimnotes_dir = "$HOME/vimnotes"
 endif
 
+if !exists("g:vimnotes_timeformat")
+  lets g:vimnotes_timeformat" = "%F"
+endif
+
 let s:diary_dir = g:vimnotes_dir . "/diary"
 let s:topic_dir = g:vimnotes_dir . "/topics"
 
 function! s:NotesOpenDiary()
-  let l:file = s:diary_dir . "/" . strftime("%F") . g:vimnotes_extension
+  let l:file = s:diary_dir . "/" . strftime(g:vimnotes_timeformat) . g:vimnotes_extension
   execute "vsp " . l:file
 endfunction
 
