@@ -12,7 +12,7 @@ if !exists("g:vimnotes_dir")
 endif
 
 if !exists("g:vimnotes_timeformat")
-  lets g:vimnotes_timeformat" = "%F"
+  let g:vimnotes_timeformat = "%F"
 endif
 
 let s:diary_dir = g:vimnotes_dir . "/diary"
